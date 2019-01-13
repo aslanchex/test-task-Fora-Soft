@@ -20,7 +20,13 @@ class Chat extends React.Component{
                             <div className="card-body">
                                 <div className="card-title">Chat room</div>
                                 <hr/>
-                                <div className="messages"></div>
+                                <div className="messages">
+                                    {this.state.messages.map(message => {
+                                        return (
+                                            <div>{message.author}: {message.message}</div>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
                         <div className="card-footer">
