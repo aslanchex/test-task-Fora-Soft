@@ -30,3 +30,15 @@
     transform: rotate(360deg);
   }
 }
+
+.col-md-4 {
+  margin-bottom: 20px;
+}
+
+.div-overflow {
+  min-height: 0px;
+  max-height: 300px;
+  border: none;
+  overflow-y: auto; /* vertical overflow */
+    
+}
