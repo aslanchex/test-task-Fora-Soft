@@ -13,6 +13,16 @@ class Chat extends React.Component {
 
     // socket listening to the running server port
     this.socket = io("localhost:8080");
+
+    // sending the message to the server every time to click 'Send Message'
+    this.sendMessage = ev => {
+        ev.preventDefault();
+        this.socket.emit('SEND_MESSAGE', {
+            author: this.state.username,
+            message: this.state.message
+        });
+        this.setState({message: ''});
+    }
   }
 
   render() {
