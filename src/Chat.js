@@ -15,12 +15,13 @@ class Chat extends React.Component{
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-8">
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-title">Chat room</div>
                                 <hr/>
                                 <div className="messages">
+                                {/* loop through all the messages which we will have and display author’s name and his message */}
                                     {this.state.messages.map(message => {
                                         return (
                                             <div>{message.author}: {message.message}</div>
