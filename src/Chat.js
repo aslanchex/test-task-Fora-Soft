@@ -12,17 +12,28 @@ class Chat extends React.Component {
     };
 
     // socket listening to the running server port
-    this.socket = io("localhost:8080");
+    this.socket = io("localhost:5000");
+
+    // the code below catch the emit sent from the server and add the object
+    this.socket.on("RECEIVE_MESSAGE", function(data) {
+      addMessage(data);
+    });
+
+    const addMessage = data => {
+      console.log(data);
+      this.setState({ messages: [...this.state.messages, data] });
+      console.log(this.state.messages);
+    };
 
     // sending the message to the server every time to click 'Send Message'
     this.sendMessage = ev => {
-        ev.preventDefault();
-        this.socket.emit('SEND_MESSAGE', {
-            author: this.state.username,
-            message: this.state.message
-        });
-        this.setState({message: ''});
-    }
+      ev.preventDefault();
+      this.socket.emit("SEND_MESSAGE", {
+        author: this.state.username,
+        message: this.state.message
+      });
+      this.setState({ message: "" });
+    };
   }
 
   render() {
@@ -50,16 +61,27 @@ class Chat extends React.Component {
               <input
                 type="text"
                 placeholder="Username"
+                value={this.state.username}
+                onChange={ev => this.setState({ username: ev.target.value })}
                 className="form-control"
               />
+
               <br />
               <input
                 type="text"
                 placeholder="Message"
                 className="form-control"
+                value={this.state.message}
+                onChange={ev => this.setState({ message: ev.target.value })}
               />
+
               <br />
-              <button className="btn btn-primary form-control">Send</button>
+              <button
+                onClick={this.sendMessage}
+                className="btn btn-primary form-control"
+              >
+                Send
+              </button>
             </div>
           </div>
         </div>
