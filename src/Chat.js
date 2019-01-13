@@ -1,6 +1,16 @@
 import React from 'react';
 
 class Chat extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            username: '',
+            message: '',
+            messages: []
+        };
+    }
+    
     render(){
         return (
             <div className="container">
