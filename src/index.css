@@ -12,3 +12,110 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+input[type='text'] {
+  border-radius: 10px;
+}
+
+input[type='submit'] {
+  border-style: none;
+  background: #fc0;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  border-radius: 10px; 
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.login-page input[type='submit'] {
+  width: 100px;
+  height: 30px;
+}
+
+.container {
+  padding-top: 50px;
+  margin: 0 auto;
+  height: 400px;
+  
+  min-width: max-content;
+  /* background-color: rgb(182, 255, 200); */
+}
+
+.login-button {
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 100px;
+  background-color: yellow;
+  border: 2px solid rgb(0, 136, 255);
+}
+
+#login-form {
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.video-send {
+  height: auto;
+  float: left;
+  margin: 0 auto;
+}
+
+.video-send #video {
+  border: 1px solid rgb(177, 177, 177);
+  border-radius: 15px;
+  height: 350px;
+  width: 400px;
+}
+
+.login-page {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.chat-page {
+  margin-left: 20px;
+  float: left;
+}
+.chat-page .chat-area {
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 10px;
+  width: 250px;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.chat-page .chat-area ul {
+  padding-left: 10px;
+}
+
+.chat-page .input-area {
+  width: 100%;
+  text-align: center;
+}
+
+.chat-page #input-message {
+  width: 190px;
+  margin-right: 10px;
+}
+
+.chat-page .send-button {
+  margin-top: 10px;
+  width: 50px;
+}
+
+.message {
+  height: auto;
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+  word-wrap: break-word;
+}
+
+p.author {
+  font-weight: bold;
+  display: inline;
+}

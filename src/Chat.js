@@ -1,10 +1,12 @@
 import React from "react";
 import io from "socket.io-client";
+import Login from "./components/Login"
+import MessageArea from "./components/MessageArea"
+import SendVideo from "./components/SendVideo"
 
-class Chat extends React.Component {
+export default class Chat extends React.Component {
   constructor(props) {
-    super(props);
-
+    super(props);    
     this.state = {
       username: "",
       message: "",
@@ -15,81 +17,66 @@ class Chat extends React.Component {
     this.socket = io("localhost:5000");
 
     // the code below catch the emit sent from the server and add the object
-    this.socket.on("RECEIVE_MESSAGE", function(data) {
-      if (data.message && data.author){
-        addMessage(data);
-      }
-    });
+    this.socket.on("RECEIVE_MESSAGE", (data) => {
+        this.addMessage(data);
+     });
 
-    const addMessage = data => {
-      this.setState({ messages: [data, ...this.state.messages] });
-      // console.log(this.state.messages);
-    };
+    this.addMessage.bind(this);
 
     // sending the message to the server every time to click 'Send Message'
-    this.sendMessage = ev => {
-      ev.preventDefault();
-      this.socket.emit("SEND_MESSAGE", {
-        author: this.state.username,
-        message: this.state.message,
-        messages: this.state.messages
-      });
-      this.setState({ message: "" });
-    };
+    this.sendMessage.bind(this);
+    this.setNickname.bind(this);
+  }
+   
+  addMessage = (data) => {
+    this.setState({ messages: [...this.state.messages, data]});
+  };
+
+  sendMessage = (ev) => {
+    ev.preventDefault();
+    let value = this.refs.nameField.state.value;
+    this.setState({ message: value });
+    this.socket.emit("SEND_MESSAGE", {
+      author: this.state.username,
+      message: value,
+      messages: this.state.messages,
+      id: this.state.messages.length
+    });
+  };
+
+  setNickname = (ev) => {
+    ev.preventDefault()
+    let value = this.refs.nameField.state.value;
+    this.setState({username: value});
+    console.log(this.state.username);
   }
 
   render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card-footer">
-              <input
-                type="text"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={ev => this.setState({ username: ev.target.value })}
-                className="form-control"
-              />
-              <br />
-              <input
-                type="text"
-                placeholder="Message"
-                className="form-control"
-                value={this.state.message}
-                onChange={ev => this.setState({ message: ev.target.value })}
-              />
-              <br />
-              <button
-                onClick={this.sendMessage}
-                className="btn btn-primary form-control"
-              >
-                Send
-              </button>
-            </div>
+    if (!this.state.username) {
+      return (
+          <div className='container'>
+            <Login 
+              value="" 
+              ref="nameField"
+              username={this.state.username} 
+              setLogin={this.setLogin}
+              onSubmit={this.setNickname}
+            />
           </div>
-          <div className="col-md-8">
-            <div className="card">
-              <div className="card-body">
-                <div className="card-title">Chat room</div>
-                <hr />
-                <div className="messages div-overflow">
-                  {/* loop through all the messages which we will have and display author’s name and his message */}
-                  {this.state.messages.map(message => {
-                    return (
-                      <div key={message.messages.length}>
-                        {message.author}: {message.message}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+        ) 
+      } else {
+        return (
+          <div className='container'>
+            <SendVideo />
+            <MessageArea
+              value=''
+              ref='nameField'
+              message={this.state.message}
+              messages={this.state.messages}
+              onSubmit={this.sendMessage}
+            />
           </div>
-        </div>
-      </div>
-    );
+        )
+    }
   }
 }
-
-export default Chat;
