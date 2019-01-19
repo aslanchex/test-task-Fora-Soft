@@ -1,12 +1,12 @@
 import React from "react";
 import io from "socket.io-client";
-import Login from "./components/Login"
-import MessageArea from "./components/MessageArea"
-import SendVideo from "./components/SendVideo"
+import Login from "./components/Login";
+import MessageArea from "./components/MessageArea";
+import SendVideoContainer from "./components/SendVideoContainer";
 
 export default class Chat extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);
     this.state = {
       username: "",
       message: "",
@@ -17,9 +17,9 @@ export default class Chat extends React.Component {
     this.socket = io("localhost:5000");
 
     // the code below catch the emit sent from the server and add the object
-    this.socket.on("RECEIVE_MESSAGE", (data) => {
-        this.addMessage(data);
-     });
+    this.socket.on("RECEIVE_MESSAGE", data => {
+      this.addMessage(data);
+    });
 
     this.addMessage.bind(this);
 
@@ -27,56 +27,55 @@ export default class Chat extends React.Component {
     this.sendMessage.bind(this);
     this.setNickname.bind(this);
   }
-   
-  addMessage = (data) => {
-    this.setState({ messages: [...this.state.messages, data]});
+
+  addMessage = data => {
+    this.setState({ messages: [...this.state.messages, data] });
   };
 
-  sendMessage = (ev) => {
+  sendMessage = ev => {
     ev.preventDefault();
     let value = this.refs.nameField.state.value;
     this.setState({ message: value });
     this.socket.emit("SEND_MESSAGE", {
       author: this.state.username,
       message: value,
-      messages: this.state.messages,
-      id: this.state.messages.length
+      messages: this.state.messages
     });
   };
 
-  setNickname = (ev) => {
-    ev.preventDefault()
+  setNickname = ev => {
+    ev.preventDefault();
     let value = this.refs.nameField.state.value;
-    this.setState({username: value});
+    this.setState({ username: value });
     console.log(this.state.username);
-  }
+  };
 
   render() {
     if (!this.state.username) {
       return (
-          <div className='container'>
-            <Login 
-              value="" 
-              ref="nameField"
-              username={this.state.username} 
-              setLogin={this.setLogin}
-              onSubmit={this.setNickname}
-            />
-          </div>
-        ) 
-      } else {
-        return (
-          <div className='container'>
-            <SendVideo />
-            <MessageArea
-              value=''
-              ref='nameField'
-              message={this.state.message}
-              messages={this.state.messages}
-              onSubmit={this.sendMessage}
-            />
-          </div>
-        )
+        <div className="container">
+          <Login
+            value=""
+            ref="nameField"
+            username={this.state.username}
+            setLogin={this.setLogin}
+            onSubmit={this.setNickname}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="container">
+          <SendVideoContainer />
+          <MessageArea
+            value=""
+            ref="nameField"
+            message={this.state.message}
+            messages={this.state.messages}
+            onSubmit={this.sendMessage}
+          />
+        </div>
+      );
     }
   }
 }

@@ -13,23 +13,22 @@ code {
     monospace;
 }
 
-
-input[type='text'] {
+input[type="text"] {
   border-radius: 10px;
 }
 
-input[type='submit'] {
+input[type="submit"] {
   border-style: none;
   background: #fc0;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  border-radius: 10px; 
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
 .title {
   margin-bottom: 20px;
 }
 
-.login-page input[type='submit'] {
+.login-page input[type="submit"] {
   width: 100px;
   height: 30px;
 }
@@ -38,7 +37,7 @@ input[type='submit'] {
   padding-top: 50px;
   margin: 0 auto;
   height: 400px;
-  
+  max-width: max-content;
   min-width: max-content;
   /* background-color: rgb(182, 255, 200); */
 }
