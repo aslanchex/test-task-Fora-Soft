@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import Login from "./components/Login";
 import MessageArea from "./components/MessageArea";
 import SendVideoContainer from "./components/SendVideoContainer";
+// import ChatList from './components/ChatList';
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -66,6 +67,7 @@ export default class Chat extends React.Component {
     } else {
       return (
         <div className="container">
+          {/* <ChatList /> */}
           <SendVideoContainer />
           <MessageArea
             value=""

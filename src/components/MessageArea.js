@@ -18,7 +18,7 @@ export default class MessageArea extends Component {
     return (
       <div className="chat-page">
         <div className="chat-area">
-          <ul className="messages">
+          <div className="messages">
             {this.props.messages.map((message, i) => {
               return (
                 <div className="message" key={i}>
@@ -26,7 +26,7 @@ export default class MessageArea extends Component {
                 </div>
               );
             })}
-          </ul>
+          </div>
         </div>
         <div className="input-area">
           <form onSubmit={this.props.onSubmit}>

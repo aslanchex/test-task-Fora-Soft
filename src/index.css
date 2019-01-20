@@ -85,6 +85,7 @@ input[type="submit"] {
   height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 5px;
 }
 
 .chat-page .chat-area ul {
@@ -106,7 +107,7 @@ input[type="submit"] {
   width: 50px;
 }
 
-.message {
+.chat-area .message {
   height: auto;
   padding: 0;
   margin: 0;
@@ -117,4 +118,38 @@ input[type="submit"] {
 p.author {
   font-weight: bold;
   display: inline;
+}
+
+.chat-room {
+  text-align: center;
+  width: 250px;
+  height: 100px;
+  border: 1px solid rgb(223, 223, 223);
+  float: left;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.chat-room:hover {
+  background: rgb(249, 255, 163);
+  color: rgb(0, 136, 255);
+  box-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+
+.chat-room:focus {
+  border-style: none;
+}
+
+.chat-room:active {
+  box-shadow: none;
+}
+
+.chat-room h3 {
+  display: inline-block;
+  /* padding: px 0 0 0; */
+  vertical-align: middle;
+  font-size: 20px;
+  word-wrap: break-word;
 }
