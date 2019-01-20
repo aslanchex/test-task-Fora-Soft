@@ -2,7 +2,8 @@ const express = require("express");
 const socket = require("socket.io");
 const app = express();
 
-let server = app.listen(5000, function() {
+let port = process.env.port || 5000;
+let server = app.listen(port, function() {
   console.log("server is running on port 5000");
 });
 
@@ -17,9 +18,8 @@ io.on("connection", (socket) => {
     io.emit("RECEIVE_MESSAGE", data);
   });
   
-  socket.on("SEND_CHATNAME", (data) => {
-    console.log(77);
-
-    io.emit("RECEIVE_CHATNAME", data);
-  });
+  // socket.on("SEND_CHATNAME", (data) => {
+  //   console.log(77);
+  //   io.emit("RECEIVE_CHATNAME", data);
+  // });
 });

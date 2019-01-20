@@ -48,7 +48,6 @@ export default class Chat extends React.Component {
     ev.preventDefault();
     let value = this.refs.nameField.state.value;
     this.setState({ username: value });
-    console.log(this.state.username);
   };
 
   render() {
